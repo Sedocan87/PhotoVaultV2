@@ -20,7 +20,7 @@ Get the foundation solid so you can build fast later.
 ### Tasks
 
 1. **Initialize Tauri Project**
-   
+   cargo tauri init
 
 2. **Set Up Frontend Stack**
    - Install Tailwind CSS: `npm install -D tailwindcss postcss autoprefixer`

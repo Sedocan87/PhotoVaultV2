@@ -38,7 +38,7 @@ pub async fn run() {
             commands::filter_photos,
             commands::search_photos
         ])
-        .setup(|app| Box::pin(async move {
+        .setup(|app| {
             if cfg!(debug_assertions) {
                 app.handle().plugin(
                     tauri_plugin_log::Builder::default()
@@ -47,7 +47,7 @@ pub async fn run() {
                 )?;
             }
             Ok(())
-        }))
+        })
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }

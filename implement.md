@@ -440,11 +440,11 @@ async fn delete_album(album_id: i64) -> Result<()>;
 Discovery and organization.
 
 ### Deliverables
-- [ ] Tag system working
-- [ ] Advanced filtering UI
-- [ ] Filter by date, resolution, size, tags
-- [ ] Search functionality
-- [ ] Synced across both drives
+- [x] Tag system working
+- [x] Advanced filtering UI
+- [x] Filter by date, resolution, size, tags
+- [x] Search functionality
+- [x] Synced across both drives
 
 ### Backend Tasks
 
@@ -531,10 +531,10 @@ async fn search_photos(query: String) -> Result<Vec<Photo>>;
 Cleanup feature that's genuinely useful.
 
 ### Deliverables
-- [ ] Hash-based duplicate detection
-- [ ] Duplicate grouping UI
-- [ ] Safe deletion of duplicates
-- [ ] Sync deletion across drives
+- [x] Hash-based duplicate detection
+- [x] Duplicate grouping UI
+- [x] Safe deletion of duplicates
+- [x] Sync deletion across drives
 
 ### Backend Tasks
 
@@ -605,10 +605,10 @@ async fn delete_duplicates(photo_ids: Vec<i64>) -> Result<i64>; // returns space
 Powerful organizational tool.
 
 ### Deliverables
-- [ ] Bulk rename with patterns
-- [ ] Rename templates (date-based, sequential, etc.)
-- [ ] Metadata editing UI
-- [ ] Sync all changes
+- [x] Bulk rename with patterns
+- [x] Rename templates (date-based, sequential, etc.)
+- [x] Metadata editing UI
+- [x] Sync all changes
 
 ### Backend Tasks
 
@@ -663,10 +663,10 @@ async fn preview_bulk_rename(photo_ids: Vec<i64>, pattern: String) -> Result<Vec
 Nice-to-have that's quick to implement.
 
 ### Deliverables
-- [ ] Full-screen slideshow mode
-- [ ] Auto-advance with configurable speed
-- [ ] Manual navigation
-- [ ] Keyboard controls
+- [x] Full-screen slideshow mode
+- [x] Auto-advance with configurable speed
+- [x] Manual navigation
+- [x] Keyboard controls
 
 ### Frontend Tasks
 
@@ -698,10 +698,10 @@ Nice-to-have that's quick to implement.
 Critical safety feature for accidental deletion recovery.
 
 ### Deliverables
-- [ ] Detect when backup differs from primary
-- [ ] One-click restore option
-- [ ] Preserve primary state
-- [ ] Show what will be restored
+- [x] Detect when backup differs from primary
+- [x] One-click restore option
+- [x] Preserve primary state
+- [x] Show what will be restored
 
 ### Backend Tasks
 
@@ -756,11 +756,11 @@ async fn restore_backup_to_primary() -> Result<()>;
 User experience refinement and configuration.
 
 ### Deliverables
-- [ ] Settings panel fully functional
-- [ ] Persistence of user preferences
-- [ ] App startup optimization
-- [ ] Error handling polish
-- [ ] Status messages clarity
+- [x] Settings panel fully functional
+- [x] Persistence of user preferences
+- [x] App startup optimization
+- [x] Error handling polish
+- [x] Status messages clarity
 
 ### Frontend Tasks
 
@@ -799,11 +799,11 @@ User experience refinement and configuration.
 Comprehensive testing before release.
 
 ### Deliverables
-- [ ] Unit tests for all services
-- [ ] Integration tests for sync workflow
-- [ ] UI component tests
-- [ ] Manual QA checklist completed
-- [ ] Performance benchmarks
+- [x] Unit tests for all services
+- [x] Integration tests for sync workflow
+- [x] UI component tests
+- [x] Manual QA checklist completed
+- [x] Performance benchmarks
 
 ### Backend Testing
 

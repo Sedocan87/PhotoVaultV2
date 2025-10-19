@@ -11,11 +11,12 @@ This guide breaks down PhotoVault development into manageable phases with clear 
 Get the foundation solid so you can build fast later.
 
 ### Deliverables
-- [ ] Tauri + React project scaffolded
-- [ ] TypeScript configured
-- [ ] Tailwind CSS + shadcn/ui set up
-- [ ] Basic project structure established
-- [ ] Development and build pipelines working
+- [x] Tauri + React project scaffolded
+- [x] TypeScript configured
+- [x] Tailwind CSS set up
+- [ ] shadcn/ui set up
+- [x] Basic project structure established
+- [x] Development and build pipelines working
 
 ### Tasks
 

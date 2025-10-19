@@ -1,5 +1,5 @@
 import { usePhotoStore } from '@/stores/photoStore';
-import { invoke } from '@tauri-apps/api/tauri';
+import { invoke } from '@tauri-apps/api/core';
 
 export function BulkActions() {
   const { selectedPhotos, setSelectedPhotos } = usePhotoStore();

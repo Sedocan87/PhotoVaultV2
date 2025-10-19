@@ -853,9 +853,9 @@ Comprehensive testing before release.
 Prepare for distribution.
 
 ### Deliverables
-- [ ] Production builds for all platforms
+- [x] Production builds for all platforms
 - [ ] Code signing certificates obtained
-- [ ] Updater mechanism tested
+- [x] Updater mechanism tested
 - [ ] Documentation finalized
 - [ ] Website/download page ready
 

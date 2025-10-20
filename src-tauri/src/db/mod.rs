@@ -4,7 +4,7 @@ use log::error;
 
 pub mod manager;
 
-pub async fn init_db(db_path: &Path) -> Result<SqlitePool, sqlx::Error> {
+pub async fn init_db(db_path: &Path, migrations_path: &Path) -> Result<SqlitePool, sqlx::Error> {
     let pool = SqlitePoolOptions::new()
         .max_connections(5)
         .connect_with(
@@ -15,18 +15,6 @@ pub async fn init_db(db_path: &Path) -> Result<SqlitePool, sqlx::Error> {
         .await?;
 
     // Run migrations
-    let migrations_path = match std::env::current_dir() {
-        Ok(mut path) => {
-            path.push("src-tauri");
-            path.push("migrations");
-            path
-        }
-        Err(e) => {
-            error!("Failed to get current directory: {}", e);
-            return Err(sqlx::Error::Io(e));
-        }
-    };
-
     let migrator = sqlx::migrate::Migrator::new(migrations_path).await;
 
     match migrator {
@@ -41,7 +29,6 @@ pub async fn init_db(db_path: &Path) -> Result<SqlitePool, sqlx::Error> {
             return Err(sqlx::Error::from(e));
         }
     }
-
 
     Ok(pool)
 }

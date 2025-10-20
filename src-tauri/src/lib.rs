@@ -3,9 +3,9 @@ mod db;
 mod models;
 mod services;
 
-use std::error::Error;
 use services::sync_engine::SyncEngine;
 use sqlx::SqlitePool;
+use tauri::{AppHandle, Manager};
 use tokio::sync::Mutex;
 
 pub struct AppState {
@@ -13,10 +13,9 @@ pub struct AppState {
 }
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
-pub async fn run() {
+pub fn run() {
     tauri::Builder::default()
         .manage(AppState {
-            // Placeholder for SqlitePool
             sync_engine: Mutex::new(SyncEngine::new(
                 SqlitePool::connect_lazy("sqlite::memory:").unwrap(),
                 None,
@@ -39,13 +38,31 @@ pub async fn run() {
             commands::search_photos
         ])
         .setup(|app| {
-            if cfg!(debug_assertions) {
-                app.handle().plugin(
-                    tauri_plugin_log::Builder::default()
-                        .level(log::LevelFilter::Info)
-                        .build(),
-                )?;
-            }
+            let handle = app.handle().clone();
+            tokio::spawn(async move {
+                // Initialize the database
+                let app_data_dir = handle
+                    .path()
+                    .app_data_dir()
+                    .expect("Failed to get app data directory");
+                let db_path = app_data_dir.join("photovault.db");
+                let migrations_path = handle
+                    .path()
+                    .resolve("migrations", tauri::path::BaseDirectory::Resource)
+                    .expect("Failed to resolve migrations path");
+
+                let db_manager = db::manager::DatabaseManager::initialize(
+                    db_path,
+                    None,
+                    &migrations_path,
+                )
+                .await
+                .expect("Failed to initialize database");
+
+                let app_state: tauri::State<AppState> = handle.state();
+                let mut sync_engine = app_state.sync_engine.lock().await;
+                *sync_engine = SyncEngine::new(db_manager.primary_db, db_manager.backup_db);
+            });
             Ok(())
         })
         .run(tauri::generate_context!())

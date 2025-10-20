@@ -1,5 +1,5 @@
 use sqlx::SqlitePool;
-use std::path::PathBuf;
+use std::path::{Path, PathBuf};
 use crate::db;
 
 pub struct DatabaseManager {
@@ -8,10 +8,10 @@ pub struct DatabaseManager {
 }
 
 impl DatabaseManager {
-    pub async fn initialize(primary_path: PathBuf, backup_path: Option<PathBuf>) -> Result<Self, sqlx::Error> {
-        let primary_db = db::init_db(&primary_path).await?;
+    pub async fn initialize(primary_path: PathBuf, backup_path: Option<PathBuf>, migrations_path: &Path) -> Result<Self, sqlx::Error> {
+        let primary_db = db::init_db(&primary_path, migrations_path).await?;
         let backup_db = if let Some(backup_path) = backup_path {
-            Some(db::init_db(&backup_path).await?)
+            Some(db::init_db(&backup_path, migrations_path).await?)
         } else {
             None
         };
